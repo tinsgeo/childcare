@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Stars Daycare | Where Every Child Shines</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f8fdfc;
+        }
+        a { text-decoration:none; color:inherit; }
+
+        header {
+            position:fixed; top:0; left:0; right:0;
+            background:rgba(41,128,185,0.95);
+            color:white; padding:1rem 0;
+            z-index:1000; backdrop-filter:blur(10px);
+        }
+        nav {
+            max-width:1200px; margin:0 auto;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:0 20px;
+        }
+        .logo { font-size:2rem; font-weight:700; }
+        .logo span { color:#ffd43b; }
+        .nav-links a { margin:0 18px; font-weight:600; transition:opacity .3s; }
+        .nav-links a:hover { opacity:0.8; }
+
+        /* Hero */
+        .hero {
+            height:100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('sigmund-TJxotQTUr8o-unsplash.jpg') center/cover no-repeat fixed;
+            display:flex; align-items:center; justify-content:center;
+            text-align:center; color:white;
+        }
+        .hero h1 { font-size:4.8rem; margin-bottom:20px; text-shadow:0 4px 15px rgba(0,0,0,0.7); }
+        .hero p { font-size:1.5rem; margin-bottom:35px; }
+        .btn {
+            display:inline-block;
+            background:#ffd43b; color:#333; padding:15px 40px;
+            border-radius:50px; font-weight:700; font-size:1.1rem;
+            box-shadow:0 6px 20px rgba(0,0,0,0.3); transition:all 0.3s;
+            margin:10px;
+        }
+        .btn:hover { background:#fcc419; transform:translateY(-5px); }
+
+        section { padding:100px 20px; max-width:1200px; margin:0 auto; text-align:center; }
+        h2 {
+            font-size:2.8rem; color:#2980b9; margin-bottom:60px;
+            position:relative;
+        }
+        h2::after {
+            content:''; width:80px; height:5px; background:#ffd43b;
+            display:block; margin:20px auto; border-radius:3px;
+        }
+
+        /* About Section */
+        .why-choose {
+            background:white; padding:60px 40px; border-radius:20px;
+            box-shadow:0 15px 40px rgba(0,0,0,0.08); margin-top:40px;
+        }
+        .features-grid {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+            gap:40px; margin-top:50px;
+        }
+        .feature {
+            background:#f0f8ff; padding:30px; border-radius:15px;
+            transition:transform 0.3s;
+        }
+        .feature:hover { transform:translateY(-10px); }
+        .feature i { font-size:3rem; color:#2980b9; margin-bottom:20px; }
+        .feature h3 { font-size:1.5rem; margin-bottom:15px; color:#2980b9; }
+
+        /* Programs Section */
+        .programs-grid {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+            gap:40px; margin-top:50px;
+        }
+        .program-card {
+            background:white; border-radius:20px; overflow:hidden;
+            box-shadow:0 10px 30px rgba(0,0,0,0.1);
+            transition:transform 0.3s;
+        }
+        .program-card:hover { transform:translateY(-12px); }
+        .program-card img {
+            width:100%; height:220px; object-fit:cover;
+        }
+        .program-content {
+            padding:30px;
+        }
+        .program-content h3 {
+            font-size:1.8rem; color:#2980b9; margin-bottom:15px;
+        }
+        .age { color:#777; font-weight:600; margin-bottom:15px; }
+        .program-content ul {
+            text-align:left; margin:20px 0; padding-left:25px;
+        }
+        .program-content ul li {
+            margin-bottom:12px; position:relative;
+        }
+        .program-content ul li::before {
+            content:"✓"; color:#ffd43b; position:absolute; left:-25px; font-weight:bold;
+        }
+
+        /* Contact Section – NOW FIXED & CENTERED */
+        #contact {
+            background: linear-gradient(135deg, #a7e1f7, #6dd5fa);
+            color: white;
+            padding: 100px 40px;
+            border-radius: 20px;
+            max-width: 1200px;
+            margin: 0 auto 100px auto !important;
+            text-align: center;
+        }
+        #contact .btn {
+            background: white;
+            color: #2980b9;
+        }
+        #contact .btn:last-child {
+            background: #2980b9;
+            color: white;
+        }
+
+        /* Popup */
+        .popup-overlay {
+            display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+            background:rgba(0,0,0,0.75); z-index:2000;
+            align-items:center; justify-content:center;
+        }
+        .popup {
+            background:white; padding:40px; border-radius:20px;
+            max-width:500px; width:90%; position:relative;
+            animation:popIn 0.6s ease-out;
+        }
+        @keyframes popIn { from{transform:scale(0.7);opacity:0} to{transform:scale(1);opacity:1} }
+        .close-popup {
+            position:absolute; top:15px; right:20px; font-size:2.2rem;
+            cursor:pointer; color:#aaa;
+        }
+        .close-popup:hover { color:#333; }
+        .form-group { margin-bottom:20px; text-align:left; }
+        .form-group label { display:block; margin-bottom:8px; font-weight:600; }
+        .form-group input { width:100%; padding:12px; border:2px solid #ddd; border-radius:10px; font-size:1rem; }
+
+        footer { background:#2c3e50; color:white; text-align:center; padding:50px 20px; }
+
+        @media (max-width:768px) {
+            .hero h1 { font-size:3.2rem; }
+            .hero p { font-size:1.3rem; }
+            .nav-links { display:none; }
+            h2 { font-size:2.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Little <span>Stars</span></div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#programs">Programs</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Little Stars Daycare</h1>
+            <p>Where love, learning, and laughter create the perfect start for your child.</p>
+            <a href="#contact" class="btn">Schedule a Tour Today</a>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section id="about">
+        <h2>Why Parents Choose Little Stars</h2>
+        <p>We’re more than a daycare — we’re your child’s home away from home.</p>
+
+        <div class="why-choose">
+            <div class="features-grid">
+                <div class="feature"><div>1</div><h3>Low Teacher-to-Child Ratios</h3><p>1:4 for infants, 1:6 for toddlers — far better than state requirements.</p></div>
+                <div class="feature"><div>2</div><h3>Degreed & Passionate Teachers</h3><p>All lead teachers have Early Childhood Education degrees or CDA credentials.</p></div>
+                <div class="feature"><div>3</div><h3>Secure & Spotless Facility</h3><p>Keypad entry, live cameras, daily professional cleaning.</p></div>
+                <div class="feature"><div>4</div><h3>Daily Reports & Photos</h3><p>Real-time updates via our parent app.</p></div>
+                <div class="feature"><div>5</div><h3>Organic Meals & Snacks</h3><p>Fresh, allergy-aware meals included daily.</p></div>
+                <div class="feature"><div>6</div><h3>Proven Kindergarten Readiness</h3><p>100% of graduates test above average.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section id="programs">
+        <h2>Our Age-Tailored Programs</h2>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="program-content">
+                    <h3>Infant Program</h3>
+                    <div class="age">6 weeks – 18 months</div>
+                    <ul>
+                        <li>Individualized schedules matching home routine</li>
+                        <li>Sensory play, sign language, music & movement</li>
+                        <li>Focus on attachment and brain development</li>
+                        <li>Daily infant massage and gentle yoga</li>
+                        <li>Breast milk & formula support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-content">
+                    <h3>Toddler Program</h3>
+                    <div class="age">18 months – 3 years</div>
+                    <ul>
+                        <li>Positive potty training support</li>
+                        <li>Hands-on art, blocks, and dramatic play</li>
+                        <li>Introduction to letters, numbers, shapes</li>
+                        <li>Daily outdoor play and gross motor fun</li>
+                        <li>Focus on independence & emotional growth</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-content">
+                    <h3>Preschool & Pre-K</h3>
+                    <div class="age">3 – 5 years</div>
+                    <ul>
+                        <li>Play-based curriculum with state standards</li>
+                        <li>Phonics, storytelling, and writing centers</li>
+                        <li>STEM experiments and beginner coding</li>
+                        <li>Spanish, music, yoga, and mindfulness</li>
+                        <li>Kindergarten readiness portfolio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT – NOW FIXED & BEAUTIFULLY CENTERED -->
+    <section id="contact">
+        <h2>Ready to See the Magic?</h2>
+        <p style="font-size:1.3rem; margin-bottom:40px; max-width:800px; margin-left:auto; margin-right:auto;">
+            Schedule your private tour today — we can’t wait to meet your family!
+        </p>
+        <div>
+            <a href="tel:+15559876543" class="btn">Call (555) 987-6543</a>
+            <a href="mailto:hello@littlestarsdaycare.com" class="btn">Email Us</a>
+        </div>
+    </section>
+
+    <!-- Popup Form – appears after 10 seconds -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <span class="close-popup" id="closePopup">×</span>
+            <h3>Would You Like a Private Tour?</h3>
+            <p>We’ll personally show you everything that makes Little Stars special.</p>
+            <form id="tourForm">
+                <div class="form-group">
+                    <label>First Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" required>
+                </div>
+                <div class="form-group">
+                    <label>Best Days for a Tour (Mon–Fri)</label>
+                    <div style="display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:10px;">
+                        <label><input type="checkbox" name="day"> Monday</label>
+                        <label><input type="checkbox" name="day"> Tuesday</label>
+                        <label><input type="checkbox" name="day"> Wednesday</label>
+                        <label><input type="checkbox" name="day"> Thursday</label>
+                        <label><input type="checkbox" name="day"> Friday</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Yes! Schedule My Tour</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Little Stars Daycare — Nurturing bright futures, one smile at a time.</p>
+    </footer>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('popupOverlay').style.display = 'flex';
+        }, 10000);
+
+        document.getElementById('closePopup').onclick = () => {
+            document.getElementById('popupOverlay').style.display = 'none';
+        };
+        document.getElementById('popupOverlay').onclick = (e) => {
+            if (e.target === document.getElementById('popupOverlay')) {
+                document.getElementById('popupOverlay').style.display = 'none';
+            }
+        };
+
+        document.getElementById('tourForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Thank you! We’ll call you within 24 hours to schedule your private tour. See you soon!');
+            document.getElementById('popupOverlay').style.display = 'none';
+        };
+    </script>
+</body>
+</html>
