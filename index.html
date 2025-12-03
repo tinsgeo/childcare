@@ -3,318 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Stars Daycare | Where Every Child Shines</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.7;
-            color: #333;
-            background: #f8fdfc;
-        }
-        a { text-decoration:none; color:inherit; }
-
-        header {
-            position:fixed; top:0; left:0; right:0;
-            background:rgba(41,128,185,0.95);
-            color:white; padding:1rem 0;
-            z-index:1000; backdrop-filter:blur(10px);
-        }
-        nav {
-            max-width:1200px; margin:0 auto;
-            display:flex; justify-content:space-between; align-items:center;
-            padding:0 20px;
-        }
-        .logo { font-size:2rem; font-weight:700; }
-        .logo span { color:#ffd43b; }
-        .nav-links a { margin:0 18px; font-weight:600; transition:opacity .3s; }
-        .nav-links a:hover { opacity:0.8; }
-
-        /* Hero */
-        .hero {
-            height:100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('sigmund-TJxotQTUr8o-unsplash.jpg') center/cover no-repeat fixed;
-            display:flex; align-items:center; justify-content:center;
-            text-align:center; color:white;
-        }
-        .hero h1 { font-size:4.8rem; margin-bottom:20px; text-shadow:0 4px 15px rgba(0,0,0,0.7); }
-        .hero p { font-size:1.5rem; margin-bottom:35px; }
-        .btn {
-            display:inline-block;
-            background:#ffd43b; color:#333; padding:15px 40px;
-            border-radius:50px; font-weight:700; font-size:1.1rem;
-            box-shadow:0 6px 20px rgba(0,0,0,0.3); transition:all 0.3s;
-            margin:10px;
-        }
-        .btn:hover { background:#fcc419; transform:translateY(-5px); }
-
-        section { padding:100px 20px; max-width:1200px; margin:0 auto; text-align:center; }
-        h2 {
-            font-size:2.8rem; color:#2980b9; margin-bottom:60px;
-            position:relative;
-        }
-        h2::after {
-            content:''; width:80px; height:5px; background:#ffd43b;
-            display:block; margin:20px auto; border-radius:3px;
-        }
-
-        /* About Section */
-        .why-choose {
-            background:white; padding:60px 40px; border-radius:20px;
-            box-shadow:0 15px 40px rgba(0,0,0,0.08); margin-top:40px;
-        }
-        .features-grid {
-            display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-            gap:40px; margin-top:50px;
-        }
-        .feature {
-            background:#f0f8ff; padding:30px; border-radius:15px;
-            transition:transform 0.3s;
-        }
-        .feature:hover { transform:translateY(-10px); }
-        .feature i { font-size:3rem; color:#2980b9; margin-bottom:20px; }
-        .feature h3 { font-size:1.5rem; margin-bottom:15px; color:#2980b9; }
-
-        /* Programs Section */
-        .programs-grid {
-            display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
-            gap:40px; margin-top:50px;
-        }
-        .program-card {
-            background:white; border-radius:20px; overflow:hidden;
-            box-shadow:0 10px 30px rgba(0,0,0,0.1);
-            transition:transform 0.3s;
-        }
-        .program-card:hover { transform:translateY(-12px); }
-        .program-card img {
-            width:100%; height:220px; object-fit:cover;
-        }
-        .program-content {
-            padding:30px;
-        }
-        .program-content h3 {
-            font-size:1.8rem; color:#2980b9; margin-bottom:15px;
-        }
-        .age { color:#777; font-weight:600; margin-bottom:15px; }
-        .program-content ul {
-            text-align:left; margin:20px 0; padding-left:25px;
-        }
-        .program-content ul li {
-            margin-bottom:12px; position:relative;
-        }
-        .program-content ul li::before {
-            content:"✓"; color:#ffd43b; position:absolute; left:-25px; font-weight:bold;
-        }
-
-        /* Contact Section – NOW FIXED & CENTERED */
-        #contact {
-            background: linear-gradient(135deg, #a7e1f7, #6dd5fa);
-            color: white;
-            padding: 100px 40px;
-            border-radius: 20px;
-            max-width: 1200px;
-            margin: 0 auto 100px auto !important;
-            text-align: center;
-        }
-        #contact .btn {
-            background: white;
-            color: #2980b9;
-        }
-        #contact .btn:last-child {
-            background: #2980b9;
-            color: white;
-        }
-
-        /* Popup */
-        .popup-overlay {
-            display:none; position:fixed; top:0; left:0; right:0; bottom:0;
-            background:rgba(0,0,0,0.75); z-index:2000;
-            align-items:center; justify-content:center;
-        }
-        .popup {
-            background:white; padding:40px; border-radius:20px;
-            max-width:500px; width:90%; position:relative;
-            animation:popIn 0.6s ease-out;
-        }
-        @keyframes popIn { from{transform:scale(0.7);opacity:0} to{transform:scale(1);opacity:1} }
-        .close-popup {
-            position:absolute; top:15px; right:20px; font-size:2.2rem;
-            cursor:pointer; color:#aaa;
-        }
-        .close-popup:hover { color:#333; }
-        .form-group { margin-bottom:20px; text-align:left; }
-        .form-group label { display:block; margin-bottom:8px; font-weight:600; }
-        .form-group input { width:100%; padding:12px; border:2px solid #ddd; border-radius:10px; font-size:1rem; }
-
-        footer { background:#2c3e50; color:white; text-align:center; padding:50px 20px; }
-
-        @media (max-width:768px) {
-            .hero h1 { font-size:3.2rem; }
-            .hero p { font-size:1.3rem; }
-            .nav-links { display:none; }
-            h2 { font-size:2.3rem; }
-        }
-    </style>
+    <title>Respite Care - Kids on the Move</title>
 </head>
 <body>
-
     <header>
-        <nav>
-            <div class="logo">Little <span>Stars</span></div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#programs">Programs</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
+        <h1>Respite Care - Kids on the Move</h1>
     </header>
+    <div class="container">
+        <section class="section">
+            <h2>Compassionate & Exceptional Respite Care Services</h2>
+            <p><em>Take a breath so you can come back even stronger.</em></p>
+            <h3>Taking a Break, Restoring Balance</h3>
+        </section>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Little Stars Daycare</h1>
-            <p>Where love, learning, and laughter create the perfect start for your child.</p>
-            <a href="#contact" class="btn">Schedule a Tour Today</a>
-        </div>
-    </section>
+        <section class="section">
+            <h2>Every Parent Deserves Time To Recharge</h2>
+            <p>Caring for a child with special needs or a disability often means you are on the clock 24/7. As parents, the opportunity to have a night out or just spend a few hours alone is usually few and far between or non-existent. On top of the usual obstacles of reliable or affordable childcare, you probably also find yourself asking.</p>
+            <ul>
+                <li>Is anyone available and willing to take on the additional mental and physical load that comes with caring for my child?</li>
+                <li>Can someone genuinely be trusted with the complexities of my child’s care?</li>
+                <li>Will my child be able to communicate their needs to a sitter?</li>
+            </ul>
+        </section>
 
-    <!-- ABOUT US -->
-    <section id="about">
-        <h2>Why Parents Choose Little Stars</h2>
-        <p>We’re more than a daycare — we’re your child’s home away from home.</p>
+        <section class="section">
+            <h2>Respite Care Designed With Your Child in Mind</h2>
+            <p>No matter your child’s diagnosis or story, our Respite Care services are designed to accommodate their needs for up to several hours.</p>
+            <ul>
+                <li>Every child is assigned a screened and trained volunteer. The volunteer spends the entire evening playing one-on-one with the child and is directed never to leave their side.</li>
+                <li>Children can access safe and developmentally appropriate crafts, toys, and outdoor play spaces when the weather is nice, and they can spend their time how they choose!</li>
+                <li>A KOTM staff member and a volunteer supervisor are on-site at all times. Children who require medication or nursing care are assigned to a night with a nurse. (Six out of seven of our current respite staff are nurses)</li>
+                <li>We know separation can often be difficult for children, but we have you covered there, too! While the first visit may be emotional, do not worry; we will find something your little one loves and get them excited about coming to Respite Care.</li>
+            </ul>
+        </section>
 
-        <div class="why-choose">
-            <div class="features-grid">
-                <div class="feature"><div>1</div><h3>Low Teacher-to-Child Ratios</h3><p>1:4 for infants, 1:6 for toddlers — far better than state requirements.</p></div>
-                <div class="feature"><div>2</div><h3>Degreed & Passionate Teachers</h3><p>All lead teachers have Early Childhood Education degrees or CDA credentials.</p></div>
-                <div class="feature"><div>3</div><h3>Secure & Spotless Facility</h3><p>Keypad entry, live cameras, daily professional cleaning.</p></div>
-                <div class="feature"><div>4</div><h3>Daily Reports & Photos</h3><p>Real-time updates via our parent app.</p></div>
-                <div class="feature"><div>5</div><h3>Organic Meals & Snacks</h3><p>Fresh, allergy-aware meals included daily.</p></div>
-                <div class="feature"><div>6</div><h3>Proven Kindergarten Readiness</h3><p>100% of graduates test above average.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROGRAMS -->
-    <section id="programs">
-        <h2>Our Age-Tailored Programs</h2>
-
-        <div class="programs-grid">
-            <div class="program-card">
-                <div class="program-content">
-                    <h3>Infant Program</h3>
-                    <div class="age">6 weeks – 18 months</div>
-                    <ul>
-                        <li>Individualized schedules matching home routine</li>
-                        <li>Sensory play, sign language, music & movement</li>
-                        <li>Focus on attachment and brain development</li>
-                        <li>Daily infant massage and gentle yoga</li>
-                        <li>Breast milk & formula support</li>
-                    </ul>
+        <section class="section">
+            <h2>Respite Care Hours & Locations</h2>
+            <p><strong>Friday and Saturday Evenings</strong> 6pm-9pm</p>
+            <p><strong>Cost:</strong> Completely free to families. This program is funded by donations and volunteers.</p>
+            <div class="locations">
+                <div class="location">
+                    <h3>Orem</h3>
+                    <p>475 West 260 North Orem, UT 84057</p>
+                </div>
+                <div class="location">
+                    <h3>Lehi</h3>
+                    <p>850 South 1700 West Lehi, UT 84043</p>
+                </div>
+                <div class="location">
+                    <h3>Springville</h3>
+                    <p>105 South 400 East Springville, UT 84663</p>
                 </div>
             </div>
+        </section>
 
-            <div class="program-card">
-                <div class="program-content">
-                    <h3>Toddler Program</h3>
-                    <div class="age">18 months – 3 years</div>
-                    <ul>
-                        <li>Positive potty training support</li>
-                        <li>Hands-on art, blocks, and dramatic play</li>
-                        <li>Introduction to letters, numbers, shapes</li>
-                        <li>Daily outdoor play and gross motor fun</li>
-                        <li>Focus on independence & emotional growth</li>
-                    </ul>
+        <section class="section">
+            <h2>Proud Parents. Thriving Kiddos</h2>
+        </section>
+
+        <section class="section">
+            <h2>Real Families, Real Relief</h2>
+            <p>At KOTM, We Steadfastly Believe in Parent Empowerment</p>
+        </section>
+
+        <section class="section">
+            <h2>Join Our Respite Care Program</h2>
+            <p>It would be our honor to serve your family with Respite Care services at KOTM. Here are the next steps to joining the program.</p>
+            <h3>First, Let’s Make Sure We’re a Fit</h3>
+            <p>To serve as many families as possible to the best of our ability in a safe environment, children who are eligible for Respite Care are…</p>
+            <ul>
+                <li>Between 0-12 years old.</li>
+                <li>Diagnosed with a special need that is an intellectual, behavioral, or physical disability.</li>
+                <li>Able to be at respite until 9:00 p.m. without it disturbing their bedtime routine.</li>
+                <li>Not on 100% oxygen or excessively medically fragile.</li>
+                <li>Free of a history of sexually inappropriate or aggressive behavior.</li>
+                <li>In a family that does not already have resources that provide them with a break from caregiving.</li>
+            </ul>
+            <h3>Next, Fill Out an Application</h3>
+            <p>Please fill out one application per family; you can add multiple children if you have several with special needs. Due to the high volume of families needing respite services, there is often a waitlist. We will let you know that we have received your application.</p>
+            <a href="https://kotm.org/respite-care-application-form/" class="apply-btn">Apply for Respite Care</a>
+            <h3>Finally, Get Ready To Party!</h3>
+            <p>Once a spot opens up, we will schedule an intake interview. We will review any behavioral and medical needs regarding your child. Either the nurse or our behavioral center manager will develop a plan to handle your child’s needs in a positive, loving way. After a few visits, many of our Respite kids tell their parents that they wait all month for Respite because they have so much fun!</p>
+        </section>
+
+        <section class="section">
+            <h2>Find Comfort and Support with Respite Care Near You</h2>
+            <p>Explore our trusted respite care services, available at multiple convenient locations, designed to give families the relief they need while ensuring their children receive compassionate and quality care.</p>
+            <!-- Locations repeated for emphasis, but using the flex div above -->
+        </section>
+
+        <section class="section">
+            <h2>Take the Next Step Toward Support</h2>
+            <p>We look forward to connecting with you and providing the respite care your family deserves. Let us help you achieve the balance and relief you need to thrive.</p>
+        </section>
+
+        <section class="section">
+            <h3>Make a Difference Through Respite Care</h3>
+            <p>The incredible work we do at our Respite Care program is completely donor-based and would not be possible without your support. For many families, this is the only break they get from caregiving for the entire month. If you’d like to support our Respite Care program, you can learn more about it and how to help on our donation page.</p>
+        </section>
+
+        <section class="section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq">
+                <h4>What is Respite Care?</h4>
+                <p>Respite Care offers temporary relief to primary caregivers, providing short-term, professional care for children with special needs.</p>
+            </div>
+            <div class="faq">
+                <h4>Who are the caregivers?</h4>
+                <p>Our caregivers are trained and screened volunteers overseen by both a nurse and a KOTM staff member experienced in handling the specific needs of children with disabilities and delays.</p>
+            </div>
+            <div class="faq">
+                <h4>What does Respite Care cost?</h4>
+                <p>Our evening program is free to families and funded through generous donations.</p>
+            </div>
+            <div class="faq">
+                <h4>How often can my child attend Respite Care?</h4>
+                <p>Because we have a waiting list, we currently offer one night per month to each family. There is an on-call list for families waiting for services.</p>
+            </div>
+            <div class="faq">
+                <h4>How are my child’s toileting needs met at Respite Care?</h4>
+                <p>For toileting needs, we have children of all ages who are completely dependent and need diaper changes. We also have children who are completely independent. When a child requires a diaper change or needs to use the restroom independently, two people are always present—a member of our staff and a volunteer. Children are allowed their privacy based on their ability to use the restroom.</p>
+            </div>
+            <div class="faq">
+                <h4>Are typical siblings eligible to attend Respite Care nights?</h4>
+                <p>Our program is limited to children with behavioral or physical disabilities.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>More from Kids on the Move: Resources</h3>
+            <p>The resources, education, and updates you’ve been looking for are all at your fingertips.</p>
+            <div class="resources">
+                <div class="resource">
+                    <h4>Sensory Processing Disorder vs Autism: What’s the Difference?</h4>
+                    <p>Loud noises make me want to cover my ears and disappear into the ground, it’s borderline painful. Bright/flashing lights are anxiety-inducing and completely...</p>
+                </div>
+                <div class="resource">
+                    <h4>What to Do After An Autism Diagnosis</h4>
+                    <p>Did you or your child just recently get an autism diagnosis and you’re not sure what to do now? Receiving an autism diagnosis...</p>
+                </div>
+                <div class="resource">
+                    <h4>Early Intensive Behavioral Intervention: What is EIBI?</h4>
+                    <p>Early Intensive Behavioral Intervention (EIBI) is an evidence-based treatment approach used for young children diagnosed with autism spectrum disorder (ASD).</p>
                 </div>
             </div>
+            <a href="https://kotm.org/blogs/" class="apply-btn">Visit the Blog To Find More Resources</a>
+        </section>
 
-            <div class="program-card">
-                <div class="program-content">
-                    <h3>Preschool & Pre-K</h3>
-                    <div class="age">3 – 5 years</div>
-                    <ul>
-                        <li>Play-based curriculum with state standards</li>
-                        <li>Phonics, storytelling, and writing centers</li>
-                        <li>STEM experiments and beginner coding</li>
-                        <li>Spanish, music, yoga, and mindfulness</li>
-                        <li>Kindergarten readiness portfolio</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT – NOW FIXED & BEAUTIFULLY CENTERED -->
-    <section id="contact">
-        <h2>Ready to See the Magic?</h2>
-        <p style="font-size:1.3rem; margin-bottom:40px; max-width:800px; margin-left:auto; margin-right:auto;">
-            Schedule your private tour today — we can’t wait to meet your family!
-        </p>
-        <div>
-            <a href="tel:+15559876543" class="btn">Call (555) 987-6543</a>
-            <a href="mailto:hello@littlestarsdaycare.com" class="btn">Email Us</a>
-        </div>
-    </section>
-
-    <!-- Popup Form – appears after 10 seconds -->
-    <div class="popup-overlay" id="popupOverlay">
-        <div class="popup">
-            <span class="close-popup" id="closePopup">×</span>
-            <h3>Would You Like a Private Tour?</h3>
-            <p>We’ll personally show you everything that makes Little Stars special.</p>
-            <form id="tourForm">
-                <div class="form-group">
-                    <label>First Name *</label>
-                    <input type="text" required>
-                </div>
-                <div class="form-group">
-                    <label>Last Name *</label>
-                    <input type="text" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" required>
-                </div>
-                <div class="form-group">
-                    <label>Best Days for a Tour (Mon–Fri)</label>
-                    <div style="display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:10px;">
-                        <label><input type="checkbox" name="day"> Monday</label>
-                        <label><input type="checkbox" name="day"> Tuesday</label>
-                        <label><input type="checkbox" name="day"> Wednesday</label>
-                        <label><input type="checkbox" name="day"> Thursday</label>
-                        <label><input type="checkbox" name="day"> Friday</label>
-                    </div>
-                </div>
-                <button type="submit" class="btn">Yes! Schedule My Tour</button>
+        <section class="newsletter">
+            <h2>SIGN UP FOR OUR NEWSLETTER</h2>
+            <p>Stay in the Know</p>
+            <p>Sign up for emails from KOTM to get the latest updates on resources, events, and advocacy work being done by us and our partners across the country.</p>
+            <form>
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Send</button>
             </form>
-        </div>
+        </section>
+
+        <section class="section">
+            <p><a href="https://alsfgmgz.donorsupport.co/page/share-hope">Share Hope This Season by Sending a Share-Hope Card!</a></p>
+        </section>
+
+        <section class="staff-bio">
+            <h3>Mat Dastrup, CFO</h3>
+            <p>Mat Dastrup, Chief Financial Officer at KOTM, truly embodies a blend of expertise and visionary leadership. Joining Kids on the Move in September 2019, Mat brought a rich history of accomplishments, having served as CFO for manufacturing and software companies. His successful track record includes starting and selling three businesses, showcasing his entrepreneurial spirit and strategic insight. As a licensed CPA and a Six Sigma Black Belt, Mat’s skill set is uniquely suited to driving innovation and accuracy within financial processes. His passion for integrating technology and developing robust accounting systems positions KOTM for long-term success. His presence in the organization is marked by a steadfast commitment to fostering an environment of lasting change, ensuring families benefit from his transformative work well into the future.</p>
+        </section>
+
+        <section class="staff-bio">
+            <h3>Ryan Erickson, COO</h3>
+            <p>Ryan Erickson, the Chief Operating Officer of KOTM, brings extensive experience and a passionate commitment to nurturing innovation and growth. With over two decades spent as a thought leader and innovator across leadership roles in the medical, software start-ups, technical consulting, and information technology sectors, he has steered successful technology companies to new heights. Ryan’s expertise is unparalleled. His dedication to mentoring entrepreneurs and CEOs in transforming ideas into reality speaks to his compassionate nature and deep-seated commitment to growth. Serving on several software and technical company boards, Ryan consistently helps these companies reach new heights. At KOTM, Ryan is uniquely positioned to guide the organization into its next 40 years. His diverse skill set enables KOTM to not only meet current challenges with agility but also to strategically position itself for future growth under his committed leadership. Ryan continues to inspire hope and innovation, reinforcing KOTM’s status as a beacon of support and transformation for families everywhere.</p>
+        </section>
+
+        <section class="staff-bio">
+            <h3>Rachelle Rutherford, CEO</h3>
+            <p>Rutherford is the strategic visionary and Chief Executive Officer of Kids on the Move (KOTM). A multifaceted and sophisticated businesswoman, she has led the trailblazing multimillion-dollar non-profit in its commitment to providing essential and comprehensive support, education, and therapies for children with delays and disabilities. Rutherford has now spent 20 years in executive leadership roles within the telecommunications, genealogy, real estate, health care services, and education industries. Her notable contributions lie in her perseverance to find impossible and impactful solutions. Rutherford is skilled at reverse-engineering goals by mapping out exactly what is required for a successful outcome. To help raise $150M to expand KOTM’s support services and establish a state-of-the-art center, Rutherford has partnered with Forbes Books to author and publish Chasing The Impossible, a captivating exposé delving into Kids on the Move’s transformative work. With it, she uncovers the compelling stories of resilience and hope from children, families, doctors, and community members who tenaciously pushed forward when faced with impossible odds or challenges. Her profound understanding of what it takes to overcome the impossible stems from her own journey as a survivor of abuse and trauma, which has shaped her philanthropic missions, her intuitive nature, and her steadfast leadership. As a CEO, mom, speaker, and philanthropist, Rutherford believes discipline is one of the highest forms of self-love, consistently putting in the necessary work every single day to provide impactful solutions for others, promote a balanced and holistic lifestyle, and create opportunities for continuous growth and empowerment around the world.</p>
+        </section>
     </div>
-
-    <footer>
-        <p>© 2025 Little Stars Daycare — Nurturing bright futures, one smile at a time.</p>
-    </footer>
-
-    <script>
-        setTimeout(() => {
-            document.getElementById('popupOverlay').style.display = 'flex';
-        }, 10000);
-
-        document.getElementById('closePopup').onclick = () => {
-            document.getElementById('popupOverlay').style.display = 'none';
-        };
-        document.getElementById('popupOverlay').onclick = (e) => {
-            if (e.target === document.getElementById('popupOverlay')) {
-                document.getElementById('popupOverlay').style.display = 'none';
-            }
-        };
-
-        document.getElementById('tourForm').onsubmit = (e) => {
-            e.preventDefault();
-            alert('Thank you! We’ll call you within 24 hours to schedule your private tour. See you soon!');
-            document.getElementById('popupOverlay').style.display = 'none';
-        };
-    </script>
 </body>
 </html>
